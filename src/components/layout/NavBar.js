@@ -8,7 +8,7 @@ const NavBar = () => {
     return(
         <nav className="nav-wrapper fixed-top myNav">
             <div className="container">
-                <Link to="/" className="left"><img className="myBrand" src={brand} align="center" width="60" height="60" alt="a7a"/>Book A Book</Link>
+                <Link to="bookabook/" className="left"><img className="myBrand" src={brand} align="center" width="60" height="60" alt="a7a"/>Book A Book</Link>
                 <Link to="#" className="sidenav-trigger right" data-target="mobile-links"><i className="material-icons">menu</i></Link>
                 <SignedInLinks/>
                 <SignedOutLinks/>
