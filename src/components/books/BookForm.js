@@ -14,10 +14,26 @@ class BookForm extends Component {
 
     submit = (e) => {
         e.preventDefault();
+        const keys = Object.keys(this.state);
+        for (const key of keys) {
+            if (this.state[key] === "") {
+                alert('Seems like some informations about the book is missing');
+                return;
+            }
+        }
         this.props.addBook(this.state);
+        alert('YAY!! You added a new book');
+        this.props.history.push('./buy');
     }
 
     changeText = (e) => {
+        if (e.target.id === "image") {
+            var files=e.target.files;
+            var mimeType=files[0].type; // You can get the mime type
+            if (mimeType.indexOf("image") === -1) {
+                return;
+            }
+        }
         let value = e.target.value;
         let state = {...this.state};
         state[e.target.id] = value;
@@ -33,7 +49,7 @@ class BookForm extends Component {
                     <div><input id="author" className="input-text small-text white-text berlin-font trans-background margin-top" type="text" value={this.state.author} onChange={e => this.changeText(e)} placeholder="Book Author"/></div>
                     <div><textarea id="description" className="input-text small-text white-text berlin-font trans-background margin-top" type="text" value={this.state.description} onChange={e => this.changeText(e)} placeholder="Book Description"/></div>
                     <div><input id="price" className="input-text small-text white-text berlin-font trans-background margin-top" type="number" value={this.state.price} onChange={e => this.changeText(e)} placeholder="Price"/></div>
-                    <div><input id="image" className="input-text small-text white-text berlin-font trans-background margin-top" type="file" value={this.state.image} onChange={e => this.changeText(e)}/></div>
+                    <div><input id="image" className="input-text small-text white-text berlin-font trans-background margin-top" type="file" accept="image/*" value={this.state.image} onChange={e => this.changeText(e)}/></div>
                     <div><button type="button" className="submit-button button-orange small-text berlin-font margin-top-4 margin-bottom-2" onClick={e => this.submit(e)}>ADD BOOK</button></div>
                 </form>
             </div>
