@@ -1,0 +1,117 @@
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.55);
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 5px 22px 0 rgba(0, 0, 0, 0.19);
+    width: 50vw;
+    min-height: 50vh;
+    height: auto;
+    border-radius: 20px;
+}
+
+.signin {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*background: -webkit-linear-gradient(to right, #91EAE4, #00b7ff);
+    background: linear-gradient(to right, #91EAE4, #00b7ff);*/
+}
+
+.name-input {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-text {
+    width: 30vw;
+    border: 1.5px solid white;
+    border-radius: 20px;
+    padding: 10px;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    outline: none;
+}
+
+::placeholder {
+    color: rgb(246, 246, 246);
+    font-weight: 100;
+    font-family: "Berlin Sans FB";
+}
+
+.input-text:focus {
+    border: 1.5px solid #00b7ff;
+}
+
+.text-name {
+    width: calc(15vw - 20px);
+}
+
+.submit-button {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1.5px solid #00b7ff;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 20px;
+    -webkit-transition-duration: 0.3s; /* Safari */
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #00b7ff;
+    border: 1.5px solid #00b7ff;
+    color: white;
+}
+
+.submit-button:active {
+    background-color: #02a2e2;
+    border: 1.5px solid #02a2e2;
+    color: white;
+}
+
+.submit-button:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+.button-orange {
+    background-color: orange;
+    border: 1.5px solid orange;
+    color: white;
+}
+
+.button-orange:hover {
+    background-color: white;
+    border: 1.5px solid white;
+    color: orange;
+}
+
+.button-orange:active {
+    background-color: whitesmoke;
+    border: 1.5px solid whitesmoke;
+    color: orange;
+}
+
+@media only screen and (max-width: 1000px) {
+    .signin-form {
+        width: 100% !important;
+        min-height: calc(100vh) !important;
+    }
+
+    .input-text {
+        width: 50vw !important;
+    }
+
+    .text-name {
+        width: calc(25vw - 20px) !important;
+    }
+}

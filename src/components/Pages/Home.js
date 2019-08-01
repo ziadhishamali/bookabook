@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 class Home extends Component {
     today = new Date();
@@ -7,7 +8,7 @@ class Home extends Component {
         hours: (this.time.split(":"))[0],
         minutes: (this.time.split(":"))[1],
         seconds: (this.time.split(":"))[2].split(" ")[0],
-        am: (this.time.split(":"))[2].split(" ")[1],
+        am: (this.time.split(":"))[2].split(" ")[1].toLowerCase(),
     };
 
     updateTime = () => {
@@ -17,33 +18,39 @@ class Home extends Component {
             hours: (this.time.split(":"))[0],
             minutes: (this.time.split(":"))[1],
             seconds: (this.time.split(":"))[2].split(" ")[0],
-            am: (this.time.split(":"))[2].split(" ")[1],
+            am: (this.time.split(":"))[2].split(" ")[1].toLowerCase(),
         });
     };
 
     componentDidMount() {
-        setInterval(this.updateTime, 1000);
+        this.interval = setInterval(this.updateTime, 1000);
     }
 
     componentWillUnmount() {
-        clearInterval(this.updateTime);
+        clearInterval(this.interval);
     }
 
     render() {
         return (
-            <div className="homePage">
-                <p className="center mainPara">It's never late to read a <span className="orangePara">BOOK</span></p>
-                <div className="center clock">
+            <div className="homePage flex-column justify align">
+                <span className="mainPara xlarge-text-vw white-text Forte-font lighter-weight">It's never late to read a <Link to="/bookabook/buy" className="white-text Forte-font bolder-weight">BOOK</Link></span>
+                <div className="clock box-shadow-2 xxlarge-text-vw white-text berlin-font margin-top-4">
                     <span>{this.state.hours}</span>
                     <span className="splitting">:</span>
                     <span>{this.state.minutes}</span>
                     <span className="splitting">:</span>
                     <span>{this.state.seconds}</span>
-                    <span className="hours">{this.state.am}</span>
+                    <span className="hours xlarge-text-vw">{this.state.am}</span>
                 </div>
             </div>
         )
     }
 }
+
+/* 
+<Link to="./buy" className="get-started margin-top-2 margin-bottom" >
+                    <img src={img} alt="next"/>
+                </Link>
+*/
 
 export default Home

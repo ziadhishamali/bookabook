@@ -1,0 +1,17 @@
+.sell {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sell .signin-form {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.sell .signin-form textarea {
+    min-height: 80px;
+}

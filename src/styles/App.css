@@ -1,0 +1,352 @@
+.bg-zig-zag{
+    /* background by SVGBackgrounds.com */
+}
+
+html {
+    background-image: url(../images/brain-again-3.jpg);
+    /*background: -webkit-linear-gradient(to right, #91EAE4, #00b7ff, #91EAE4);
+	background: linear-gradient(to right, #91EAE4, #00b7ff, #91EAE4);*/
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    position: absolute;
+    background-color: white;
+    /*background-image: url("../images/home.jpg");*/
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00b7ff;
+    border-radius: 4px;
+    -webkit-transition-duration: 0.3s; /* Safari */
+    transition-duration: 0.3s;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #02a3e2;
+}
+
+.App {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* flex classes*/
+.flex-row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* pre-defined classes that i use to style font */
+.berlin-font {
+    font-family: "Berlin Sans FB";
+}
+
+.Forte-font {
+    font-family: "Forte";
+}
+
+.arial-font {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.light-weight {
+    font-weight: 400;
+}
+
+.lighter-weight {
+    font-weight: lighter;
+}
+
+.bold-weight {
+    font-weight: bold;
+}
+
+.bolder-weight {
+    font-weight: bolder;
+}
+
+.small-text {
+    font-size: 15px;
+}
+
+.medium-text {
+    font-size: 18px;
+}
+
+.large-text {
+    font-size: 25px;
+}
+
+.xlarge-text {
+    font-size: 75px;
+}
+
+.xxlarge-text {
+    font-size: 200px;
+}
+
+.small-text-vw {
+    font-size: 1vw;
+}
+
+.medium-text-vw {
+    font-size: 1.5vw;
+}
+
+.large-text-vw {
+    font-size: 2vw;
+}
+
+.xlarge-text-vw {
+    font-size: 5vw;
+}
+
+.xxlarge-text-vw {
+    font-size: 10vw;
+}
+
+.black-text {
+    color: black;
+}
+
+.gray-text {
+    color: gray;
+}
+
+.blue-text {
+    color: #00b7ff;
+}
+
+.white-text {
+    color: white;
+}
+
+.orange-text {
+    color: orange;
+}
+
+.green-text {
+    color: green;
+}
+
+.red-text {
+    color: orangered;
+}
+
+/* margins classes */
+.margin-bottom {
+    margin-bottom: 20px;
+}
+
+.margin-top {
+    margin-top: 20px;
+}
+
+.margin-left {
+    margin-left: 20px;
+}
+
+.margin-right {
+    margin-right: 20px;
+}
+
+.margin-bottom-2 {
+    margin-bottom: 40px;
+}
+
+.margin-top-2 {
+    margin-top: 40px;
+}
+
+.margin-top-3 {
+    margin-top: 30px;
+}
+
+.margin-top-4 {
+    margin-top: 80px;
+}
+
+.margin-top-5 {
+    margin-top: 50px;
+}
+
+.margin-right-4 {
+    margin-right: 80px;
+}
+
+.margin-left-4 {
+    margin-left: 80px;
+}
+
+.margin-left-2 {
+    margin-left: 40px;
+}
+
+.margin-right-2 {
+    margin-right: 40px;
+}
+
+.margin-top-- {
+    margin-top: 5px;
+}
+
+.margin-bottom-- {
+    margin-bottom: 5px;
+}
+
+.margin-top--- {
+    margin-top: 10px;
+}
+
+.margin-top-10 {
+    margin-top: -15px;
+}
+
+.margin-bottom--- {
+    margin-bottom: 10px;
+}
+
+.margin-right-- {
+    margin-right: 5px;
+}
+
+.margin-left-- {
+    margin-left: 5px;
+}
+
+.margin-right--- {
+    margin-right: 10px;
+}
+
+.margin-left--- {
+    margin-left: 10px;
+}
+
+/* justify and align classes*/
+.justify {
+    justify-content: center ;
+}
+
+.justify-start {
+    justify-content: flex-start !important;
+}
+
+.justify-end {
+    justify-content: flex-end !important;
+}
+
+.align {
+    align-items: center;
+}
+
+.align-left {
+    align-self: flex-start !important;
+}
+
+.align-right {
+    align-self: flex-end !important;
+}
+
+.align-text {
+    text-align: center;
+}
+
+.no-justify {
+    justify-self: left !important;
+}
+
+/* backgrounds */
+.white-background {
+    background-color: white;
+}
+
+.blue-background {
+    background-color: #00b7ff;
+}
+
+.white-background-trans {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.white-background-trans-2 {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.black-background-trans {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.trans-background {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.box-shadow {
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 18px 0 rgba(0, 0, 0, 0.19);
+}
+
+.box-shadow-2 {
+    box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.22), 0 7px 21px 0 rgba(0, 0, 0, 0.21);
+}
+
+/* menu buttons */
+.icon-menu img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    /*filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(192deg) brightness(99%) contrast(106%);*/ /* #ffffff */
+    filter: invert(63%) sepia(40%) saturate(5995%) hue-rotate(164deg) brightness(102%) contrast(105%); /* #00b7ff */
+}
+
+@media only screen and (max-width: 850px) {
+    .large-text-vw {
+        font-size: 4vw;
+    }
+    
+    .xlarge-text-vw {
+        font-size: 6.8vw;
+    }
+    
+    .xxlarge-text-vw {
+        font-size: 11.5vw;
+    }
+}

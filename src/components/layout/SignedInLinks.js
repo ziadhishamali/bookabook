@@ -1,27 +1,16 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
 
-const SignedInLinks = () => {
+const SignedInLinks = ({align, linksContainer}) => {
     return (
-        <div>
-            <ul className="right hide-on-med-and-down">
-                <li><NavLink exact to="/bookabook/">Home</NavLink></li>
-                <li><NavLink to="/bookabook/sell">Sell/Lend</NavLink></li>
-                <li><NavLink to="/bookabook/buy">Buy/Borrow</NavLink></li>
-                <li><NavLink to="/bookabook/about">About</NavLink></li>
-                <li className="btn btn-floating orange"><NavLink to="/bookabook/my">Z</NavLink></li>
-                <li><NavLink to="/bookabook/logout">Log out</NavLink></li>
-            </ul>
-
-            <ul className="sidenav" id="mobile-links">
-                <li><NavLink exact to="/bookabook/">Home</NavLink></li>
-                <li><NavLink to="/bookabook/sell">Sell/Lend</NavLink></li>
-                <li><NavLink to="/bookabook/buy">Buy/Borrow</NavLink></li>
-                <li><NavLink to="/bookabook/about">About</NavLink></li>
-                <li><NavLink to="/bookabook/logout">Log out</NavLink></li>
-            </ul>
+        <div className={align + " justify-start align " + linksContainer}>
+            <NavLink exact to="/bookabook/" className="links"><span>Home</span></NavLink>
+            <NavLink to="/bookabook/sell" className="links"><span>Sell/Lend</span></NavLink>
+            <NavLink to="/bookabook/buy" className="links"><span>Buy/Borrow</span></NavLink>
+            <NavLink to="/bookabook/about" className="links"><span>About</span></NavLink>
+            <NavLink to="/bookabook/my" className="links profile-link"><span>Z</span></NavLink>
+            <NavLink to="/bookabook/signin" className="links"><span>Log out</span></NavLink>
         </div>
-
     )
 };
 
