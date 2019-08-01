@@ -14,16 +14,14 @@ class BookForm extends Component {
 
     submit = (e) => {
         e.preventDefault();
-        const keys = Object.keys(this.state);
+        /*const keys = Object.keys(this.state);
         for (const key of keys) {
             if (this.state[key] === "") {
                 alert('Seems like some informations about the book is missing');
                 return;
             }
-        }
+        }*/
         this.props.addBook(this.state);
-        alert('YAY!! You added a new book');
-        this.props.history.push('./buy');
     }
 
     changeText = (e) => {
@@ -33,6 +31,10 @@ class BookForm extends Component {
             if (mimeType.indexOf("image") === -1) {
                 return;
             }
+            let value = files[0];
+            let state = {...this.state};
+            state["imageFile"] = value;
+            this.setState(state);
         }
         let value = e.target.value;
         let state = {...this.state};

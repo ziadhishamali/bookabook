@@ -11,7 +11,7 @@ class BuyBorrow extends Component {
     state = {
         bookShown: null,
         search: "",
-        filterOption: "Sort by",
+        filterOption: "Newest",
         filterState: false,
     };
 
@@ -40,11 +40,7 @@ class BuyBorrow extends Component {
     componentDidUpdate() {
         $('.drop-down-item').on('click', (e) => {
             let state = {...this.state};
-            if (e.target.innerText === "Default") {
-                state["filterOption"] = "Sort by";
-            } else {
-                state["filterOption"] = e.target.innerText;
-            }
+            state["filterOption"] = e.target.innerText;
             state["filterState"] = !this.state.filterState;
             this.setState(state);
         });
@@ -54,7 +50,8 @@ class BuyBorrow extends Component {
         if (this.state.filterState) {
             const temp = (
                 <div className="drop-down-menu box-shadow-2">
-                    <div className="drop-down-item">Default</div>
+                    <div className="drop-down-item">Newest</div>
+                    <div className="drop-down-item">Oldest</div>
                     <div className="drop-down-item">Name: A-Z</div>
                     <div className="drop-down-item">Name: Z-A</div>
                     <div className="drop-down-item">Price: LOW-HIGH</div>
