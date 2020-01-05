@@ -8,6 +8,7 @@ export const addBook = (book) => {
 
         let task = storageRef.put(book.imageFile);
         task.on('state_changed', function progress(snapshot) {
+
             let prog = snapshot.bytesTransferred / snapshot.totalBytes * 100;
             console.log(prog);
             if (prog === 100) {
@@ -27,16 +28,25 @@ export const addBook = (book) => {
                     })
                 })
             }
+
         });
-        /*firestore.collection('books').add({
-            ...book,
-            image: url,
-            addedBy: "123654987",
-            addedAt: new Date()
-        }).then(() => {
-            dispatch({type: "ADD_BOOK", book});
-        }).catch(error => {
-            dispatch({type: "ADD_BOOK_ERROR", error});
-        })*/
+    }
+}
+
+export const changeFilter = (filterOption) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firestore = getFirestore();
+
+        firestore.collection('books').orderBy(filterOption[0], filterOption[1]).onSnapshot((snapshot) => {
+            let books = [];
+            snapshot.forEach(doc => {
+                let temp = {};
+                temp.id = doc.id;
+                temp = {...temp, ...doc.data()}
+                books.push(temp);
+            });
+            dispatch({type: "CHANGE_FILTER", books});
+        });
+
     }
 }

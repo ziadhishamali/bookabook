@@ -3,6 +3,7 @@ import '../../styles/CheckOut.css';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import Loader from '../layout/Loader';
 
 class Checkout extends Component {
 
@@ -51,9 +52,7 @@ class Checkout extends Component {
 
         if (book === undefined) {
             return (
-                <div className="homePage flex-column justify align">
-                    <span className="xlarge-text-vw Forte-font white-text">ERROR!! 404 PAGE NOT FOUND</span>
-                </div>
+                <Loader />
             )
         }
         
@@ -102,3 +101,9 @@ export default compose(
     connect(mapStateToProps),
     firestoreConnect(['books'])
 )(Checkout);
+
+/*
+<div className="homePage flex-column justify align">
+                    <span className="xlarge-text-vw Forte-font white-text">ERROR!! 404 PAGE NOT FOUND</span>
+                </div>
+*/

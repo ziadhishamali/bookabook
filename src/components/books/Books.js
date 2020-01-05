@@ -1,10 +1,12 @@
 import React from 'react'
+import Loader from '../layout/Loader';
+import { NavLink } from "react-router-dom";
 
 const Books = ({ books, showBook }) => {
 
     let booksList;
     if (books !== undefined) {
-        booksList = books.map(book => {
+        booksList = books.length ? ( books.map(book => {
             return (
                 <div key={book.id} className="card flex-column justify-start align white-background-trans box-shadow margin-top-- margin-bottom--"  onClick={() => {showBook(book.id)}}>
                     <div className="card-image flex-column justify align waves-effect waves-block waves-light">
@@ -18,15 +20,17 @@ const Books = ({ books, showBook }) => {
                             {book.description}
                         </span>
                     </div>
-                    <a href={"buy/" + book.id} className="card-action berlin-font flex-row justify align">
+                    <NavLink to={"buy/" + book.id} className="card-action berlin-font flex-row justify align">
                         Buy/Borrow
-                    </a>
+                    </NavLink>
                 </div>
             )
-        })
-    } else {
-        booksList = (
+        })) : (
             <div className="large-text-vw no-books blue-text Forte-font">Oooops!! We can't find any books</div>
+        )
+    } else if (books === undefined) {
+        booksList = (
+            <Loader />
         )
     }
 

@@ -1,19 +1,12 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
 
-const SignedOutLinks = () => {
+const SignedOutLinks = ({align, linksContainer, mobile}) => {
   return (
-      <div>
-          <ul className="right links hide-on-med-and-down">
-              <li><NavLink to="/bookabook/sign-in">Sign In</NavLink></li>
-              <li><NavLink to="/bookabook/sign-up">Sign Up</NavLink></li>
-          </ul>
-
-          <ul className="sidenav" id="mobile-links">
-              <li><NavLink to="/bookabook/sign-in">Sign In</NavLink></li>
-              <li><NavLink to="/bookabook/sign-up">Sign Up</NavLink></li>
-          </ul>
-      </div>
+        <div className={align + " justify-start align " + linksContainer}>
+            <NavLink to="/bookabook/signin" className={mobile ? "links" : "links signin-nav"}><span>Sign In</span></NavLink>
+            <NavLink to="/bookabook/signup" className={mobile ? "links" : "links signup-nav"}><span>Sign Up</span></NavLink>
+        </div>
 
   )
 };

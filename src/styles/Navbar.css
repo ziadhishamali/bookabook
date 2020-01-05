@@ -19,11 +19,6 @@
     border-bottom: 3px solid #019ad6;
 }
 
-.links-container .active:hover {
-    background-color: #00b7ff !important;
-    border-bottom: 3px solid #019ad6 !important;
-}
-
 .links-container {
     list-style: none;
     height: 100%;
@@ -69,6 +64,26 @@
     color: rgb(152, 152, 152);
 }
 
+.links.signin-nav, .links.signup-nav {
+    height: auto;
+    padding: 12px 15px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.links.signin-nav {
+    border-radius: 25px;
+    border: 2px solid orange;
+    color: orange;
+}
+
+.links.signup-nav {
+    background-color: orange;
+    color: white;
+    border-radius: 25px;
+    border: 2px solid orange;
+}
+
 .profile-link {
     background-color: orange;
     color: white;
@@ -104,6 +119,21 @@
 
 .links-container .links:hover {
     border-bottom: 2.5px solid white;
+}
+
+.links-container .active:hover {
+    background-color: #00b7ff;
+    border-bottom: 3px solid #019ad6;
+}
+
+.links.signin-nav:hover, .links.signup-nav:hover {
+    background-color: orange;
+    border: 2px solid orange;
+    transform: translateY(-5px);
+}
+
+.links.signin-nav:hover {
+    background-color: transparent;
 }
 
 .side-menu {

@@ -5,7 +5,7 @@ import Details from '../layout/Details';
 import $ from 'jquery';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
+import { changeFilter } from '../../store/actions/bookActions';
 
 class BuyBorrow extends Component { 
     state = {
@@ -13,6 +13,14 @@ class BuyBorrow extends Component {
         search: "",
         filterOption: "Newest",
         filterState: false,
+        filters: {
+            'Newest': ['addedAt', 'desc'],
+            'Oldest': ['addedAt', 'asc'],
+            'Name: A-Z': ['title', 'asc'],
+            'Name: Z-A': ['title', 'desc'],
+            'Price: LOW-HIGH': ['price', 'asc'],
+            'Price: HIGH-LOW': ['price', 'desc']
+        },
     };
 
     showBook = (id) => {
@@ -37,11 +45,18 @@ class BuyBorrow extends Component {
         this.setState({filterState: !this.state.filterState});
     }
 
+    componentDidMount() {
+        // first time filtering books
+        this.props.changeFilter(this.state.filters[this.state.filterOption]);
+    }
+
     componentDidUpdate() {
+        // add onClick action listener for each filter option
         $('.drop-down-item').on('click', (e) => {
             let state = {...this.state};
             state["filterOption"] = e.target.innerText;
             state["filterState"] = !this.state.filterState;
+            this.props.changeFilter(this.state.filters[e.target.innerText]);
             this.setState(state);
         });
     }
@@ -124,13 +139,19 @@ class BuyBorrow extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.firestore.ordered.books);
+    // maps the books list from the bookReducer to the props
     return {
-        books: state.firestore.ordered.books
+        books: state.book.books,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    // maps the changeFilter dispatch from the bookReducer to the props
+    return {
+        changeFilter: (filterOption) => dispatch(changeFilter(filterOption))
     }
 }
 
 export default compose(
-    connect(mapStateToProps),
-    firestoreConnect(['books'])
+    connect(mapStateToProps, mapDispatchToProps),
 )(BuyBorrow);

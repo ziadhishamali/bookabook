@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 //import {auth} from './firebase';
 //import { LogContext } from '../../contexts/LogContext';
+import { signup } from '../../store/actions/authActions';
+import { connect } from 'react-redux';
 
 class Signup extends Component {
     state = { 
@@ -29,10 +31,14 @@ class Signup extends Component {
         this.setState({password: e.target.value});
     }
 
-    submit = (e) => {
+    submit = async(e) => {
         e.preventDefault();
         console.log(this.state);
 
+        await this.props.signup(this.state);
+        if (this.props.user && localStorage.getItem('uid') !== undefined && localStorage.getItem('uid') !== null) {
+            this.props.history.push('/bookabook/');
+        }
         //const { setFirstName, setLastName } = this.context;
 
         // authentication
@@ -62,4 +68,17 @@ class Signup extends Component {
     }
 }
 
-export default Signup;
+const mapStateToProps = (state) => {
+    // maps the books list from the bookReducer to the props
+    return {
+        user: state.auth.user,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signup: (user) => dispatch(signup(user))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

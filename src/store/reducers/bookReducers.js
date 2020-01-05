@@ -5,9 +5,11 @@ const initState = {
 const bookReducer = (state = initState, action) => {
     switch (action.type) {
         case "ADD_BOOK":
-            console.log("added a book", action.book);
-            alert('YAY!! You added a new book');
+            alert('You added a new book');
             break;
+        case "CHANGE_FILTER":
+            let newState = {...state, books: action.books};
+            return newState;
         default:
     }
     return state;
