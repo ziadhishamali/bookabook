@@ -9,7 +9,8 @@ let options = {
     minute: '2-digit'
 };
 
-const Details = ({ book, hideBook }) => {
+const Details = ({ book, hideBook, usersData }) => {
+
     return (
         <div className="details-container">
             <button className="button-close" onClick={() => {hideBook()}}>X</button>
@@ -17,7 +18,7 @@ const Details = ({ book, hideBook }) => {
                 <img className="details-image" src={book.image} alt="book"/>
                 <p className="orange-text berlin-font bold-weight large-text margin-bottom-2">{book.title}</p>
                 <p className="black-text berlin-font">Author: <span className="blue-text">{book.author}</span></p>
-                <p className="black-text berlin-font">Added By: <span className="blue-text">{book.addedBy}</span></p>
+                <p className="black-text berlin-font">Added By: <span className="blue-text">{usersData[book.addedBy].name}</span></p>
                 <p className="black-text berlin-font">Added At: <span className="blue-text">{book.addedAt.toDate().toLocaleString('en-us', options)}</span></p>
                 <p className="black-text berlin-font">Price: <span className="blue-text">{book.price + " LE"}</span></p><br/>
             </div>

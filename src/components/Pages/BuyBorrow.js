@@ -5,7 +5,7 @@ import Details from '../layout/Details';
 import $ from 'jquery';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { changeFilter } from '../../store/actions/bookActions';
+import { changeFilter, searchBook } from '../../store/actions/bookActions';
 
 class BuyBorrow extends Component { 
     state = {
@@ -21,6 +21,7 @@ class BuyBorrow extends Component {
             'Price: LOW-HIGH': ['price', 'asc'],
             'Price: HIGH-LOW': ['price', 'desc']
         },
+        addedBy: {},
     };
 
     showBook = (id) => {
@@ -38,7 +39,7 @@ class BuyBorrow extends Component {
         let state = {...this.state};
         state[e.target.id] = e.target.value;
         this.setState(state);
-        console.log("searching for: ", e.target.value);
+        this.props.searchBook(e.target.value);
     }
 
     changeFilterState = () => {
@@ -48,9 +49,24 @@ class BuyBorrow extends Component {
     componentDidMount() {
         // first time filtering books
         this.props.changeFilter(this.state.filters[this.state.filterOption]);
+
+        
     }
 
     componentDidUpdate() {
+        // add onClick action listener for each filter option
+        $('.drop-down-item').on('click', (e) => {
+            let state = {...this.state};
+            state["filterOption"] = e.target.innerText;
+            state["filterState"] = !this.state.filterState;
+            this.props.changeFilter(this.state.filters[e.target.innerText]);
+            this.setState(state);
+        });
+    }
+
+    componentWillReceiveProps(newProps) {
+        if (newProps.books === this.props.books) return;
+
         // add onClick action listener for each filter option
         $('.drop-down-item').on('click', (e) => {
             let state = {...this.state};
@@ -100,7 +116,7 @@ class BuyBorrow extends Component {
     getDetails = () => {
         if (this.state.bookShown !== null) {
             return (
-                <Details book={this.props.books.filter((book) => {return book.id === this.state.bookShown})[0]} hideBook={this.hideBook}/>
+                <Details book={this.props.books.filter((book) => {return book.id === this.state.bookShown})[0]} usersData={this.props.usersData} hideBook={this.hideBook}/>
             )
         } else {
             return (
@@ -113,7 +129,7 @@ class BuyBorrow extends Component {
         return (
             <div className="buyborrowpage">
                 <div className="flex-column align justify align-text xlarge-text-vw white-text Forte-font margin-top-5">
-                    <span>Get yourself a book to read</span>
+                    {/*<span>Get yourself a book to read</span>*/}
                     <div className="flex-row justify align margin-top">
                         <div>
                             <div className={"box-shadow-2 filter-drop flex-column justify align align-text margin-left margin-right margin-bottom" + this.getRadius()} onClick={() => this.changeFilterState()}>
@@ -128,7 +144,7 @@ class BuyBorrow extends Component {
                     </div>
                 </div>
                 <div id="card-container" className="row margin-bottom">
-                    <Books books={this.props.books} showBook={this.showBook}/>
+                    { this.state.search.length < 1 ? <Books books={this.props.books} showBook={this.showBook}/> : <Books books={this.props.searchedBooks} showBook={this.showBook}/>}
                 </div>
                 <div className="details" id="details">
                     {this.getDetails()}
@@ -142,13 +158,16 @@ const mapStateToProps = (state) => {
     // maps the books list from the bookReducer to the props
     return {
         books: state.book.books,
+        searchedBooks: state.book.searchedBooks,
+        usersData: state.book.usersData,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     // maps the changeFilter dispatch from the bookReducer to the props
     return {
-        changeFilter: (filterOption) => dispatch(changeFilter(filterOption))
+        changeFilter: (filterOption) => dispatch(changeFilter(filterOption)),
+        searchBook: (book) => dispatch(searchBook(book))
     }
 }
 

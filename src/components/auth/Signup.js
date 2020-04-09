@@ -37,7 +37,7 @@ class Signup extends Component {
 
         await this.props.signup(this.state);
         if (this.props.user && localStorage.getItem('uid') !== undefined && localStorage.getItem('uid') !== null) {
-            this.props.history.push('/bookabook/');
+            this.props.history.push('/');
         }
         //const { setFirstName, setLastName } = this.context;
 

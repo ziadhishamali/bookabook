@@ -6,6 +6,8 @@
     top: 0;
     height: 70px;
     background-color: rgba(255, 255, 255, 0.96);
+    /*background-color: transparent;*/
+    box-shadow: none;
     z-index: 5000;
 }
 
@@ -50,6 +52,11 @@
     height: 100%;
     font-family: "Forte";
     font-weight: 600;
+}
+
+.links-title img {
+    width: 56px;
+    height: 56px;
 }
 
 .links {

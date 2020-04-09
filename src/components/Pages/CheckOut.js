@@ -4,14 +4,17 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import Loader from '../layout/Loader';
+import { ChangeGetUsers } from '../../store/actions/bookActions';
 
 class Checkout extends Component {
 
     state = {
-        number: "01113478944",
-        email: "ziadhesham97@gmail.com",
+        number: "",
+        email: "",
         showNumber: false,
         showEmail: false,
+        loading: true,
+        firstLoad: true,
     }
 
     changeNumberState = () => {
@@ -38,9 +41,29 @@ class Checkout extends Component {
         }
     }
 
+    componentDidMount() {
+        const { user } = this.props;
+        if (user === undefined) {
+            while (!confirm("you need to login first")) {
+            }
+            this.props.history.push('/signin');
+        } else {
+            this.setState({ loading: false});
+        }
+    }
+
+    componentWillReceiveProps(newProps) {
+        if (newProps.books !== this.props.books) {
+            this.props.ChangeGetUsers(newProps.books);
+        }
+    }
+
     render() {
+        if (this.state.loading) {
+            return <Loader />
+        }
         const id = this.props.match.params.buy_id;
-        console.log("the params id ", id);
+
         let book = undefined;
         if (this.props.books !== undefined) {
             book = (
@@ -49,6 +72,10 @@ class Checkout extends Component {
                 })[0]
             )
         }
+
+        let name = book !== undefined && this.props.usersData !== undefined ? this.props.usersData[book.addedBy].name : "";
+        let number = book !== undefined && this.state.showNumber && this.props.usersData !== undefined ? this.props.usersData[book.addedBy].phone || "No phone number is available" : "";
+        let email = book !== undefined && this.state.showEmail && this.props.usersData !== undefined ? this.props.usersData[book.addedBy].email || "No email address is available" : "";
 
         if (book === undefined) {
             return (
@@ -75,14 +102,14 @@ class Checkout extends Component {
                     <div className="flex-column book-description justify-start align">
                         <p className="gray-text berlin-font margin-bottom-2 align-text">{book.description}</p>
                         <p className="black-text berlin-font margin-top-4">Author: <span className="blue-text">{book.author}</span></p>
-                        <p className="black-text berlin-font">Added By: <span className="blue-text">{book.addedBy}</span></p>
+                        <p className="black-text berlin-font">Added By: <span className="blue-text">{name}</span></p>
                         <p className="black-text berlin-font">Added At: <span className="blue-text">{book.addedAt.toDate().toLocaleString('en-us', options)}</span></p>
                         <p className="black-text berlin-font">Price: <span className="blue-text">{book.price + " LE"}</span></p><br/>
                         <div className="flex-column justify align">
                             <button type="button" className="submit-button button-orange small-text berlin-font margin-left-2 margin-right-2 margin-top-4" onClick={() => {this.changeNumberState()}}>Show Number</button>
-                            <span className="margin-top--- blue-text Forte-font large-text">{this.getNumber()}</span>
+                            <span className="margin-top--- blue-text Forte-font large-text">{number}</span>
                             <button type="button" className="submit-button button-orange small-text berlin-font margin-left-2 margin-right-2 margin-top" onClick={() => {this.changeEmailState()}}>Show Email</button>
-                            <span className="margin-top--- blue-text Forte-font large-text">{this.getEmail()}</span>
+                            <span className="margin-top--- blue-text Forte-font large-text">{email}</span>
                         </div>
                     </div>
                 </div>
@@ -93,12 +120,20 @@ class Checkout extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        books: state.firestore.ordered.books
+        books: state.firestore.ordered.books,
+        usersData: state.book.usersData,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    // maps the changeFilter dispatch from the bookReducer to the props
+    return {
+        ChangeGetUsers: (books) => dispatch(ChangeGetUsers(books))
     }
 }
  
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect(['books'])
 )(Checkout);
 

@@ -33,7 +33,7 @@ class Home extends Component {
     render() {
         return (
             <div className="homePage flex-column justify align">
-                <span className="mainPara xlarge-text-vw white-text Forte-font lighter-weight">It's never late to read a <Link to="/bookabook/buy" className="white-text Forte-font bolder-weight">BOOK</Link></span>
+                <span className="mainPara xlarge-text-vw white-text Forte-font lighter-weight">It's never late to read a <Link to="/buy" className="white-text Forte-font bolder-weight">BOOK</Link></span>
                 <div className="clock box-shadow-2 xxlarge-text-vw white-text berlin-font margin-top-4">
                     <span>{this.state.hours}</span>
                     <span className="splitting">:</span>

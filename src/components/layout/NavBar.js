@@ -17,19 +17,19 @@ const NavBar = ({signedin, user}) => {
     return(
         <div className="nav-container justify align box-shadow-2">
             <div className="flex-row justify-start full-width">
-                <Link to="/bookabook/" className="links-title blue-text flex-row large-text margin-right-4 margin-left-4 align justify">
-                    <img className="margin-right-- align justify" src={brand} align="center" width="56px" height="56px" alt="5od"/>
+                <Link to="/" className="links-title blue-text flex-row large-text margin-right-4 margin-left-4 align justify">
+                    <img className="margin-right-- align justify" src={brand} alt="brand"/>
                     Book a Book
                 </Link>
             </div>
-            {signedin ? (<SignedInLinks align={"flex-row"} linksContainer={"links-container"}/>) : (<SignedOutLinks align={"flex-row"} linksContainer={"links-container"} mobile={false}/>)}
+            {signedin ? (<SignedInLinks user={user} align={"flex-row"} linksContainer={"links-container"}/>) : (<SignedOutLinks align={"flex-row"} linksContainer={"links-container"} mobile={false}/>)}
             <div id="side-menu" className="side-menu margin-left-4" onClick={() => toggleSideMenu()}>
                 <div className="bar1"></div>
                 <div className="bar2"></div>
                 <div className="bar3"></div>
             </div>
             <div id="side-nav" className="side-nav">
-                {signedin ? (<SignedInLinks align={"flex-column"} linksContainer={"links-container-side"}/>) : (<SignedOutLinks align={"flex-column"} linksContainer={"links-container-side"} mobile={true}/>)}
+                {signedin ? (<SignedInLinks user={user} align={"flex-column"} linksContainer={"links-container-side"}/>) : (<SignedOutLinks align={"flex-column"} linksContainer={"links-container-side"} mobile={true}/>)}
             </div>
         </div>
     );

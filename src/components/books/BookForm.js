@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
+import firebase from '../auth/firebase';
 import '../../styles/BookForm.css';
 import { addBook } from '../../store/actions/bookActions';
 import { connect } from 'react-redux';
+import Loader from '../layout/Loader';
 
 class BookForm extends Component {
-    state = { 
+    state = {
+        loading: true,
         title: "",
         author: "",
         description: "",
         price: "",
         image: "",
+        addedBy: this.props.user ? this.props.user.uid || "" : "",
     }
 
     submit = (e) => {
@@ -42,7 +46,19 @@ class BookForm extends Component {
         this.setState(state);
     }
 
+    componentDidMount() {
+        const { user } = this.props;
+        if (user === undefined) {
+            this.props.history.push('/signin');
+        } else {
+            this.setState({ loading: false});
+        }
+    }
+
     render() { 
+        if (this.state.loading) {
+            return <Loader />
+        }
         return (
             <div className="sell">
                 <form className="signin-form" onSubmit={e => this.submit(e)}>

@@ -23,7 +23,7 @@ class Signin extends Component {
 
         await this.props.signin(this.state);
         if (this.props.user && localStorage.getItem('uid') !== undefined && localStorage.getItem('uid') !== null) {
-            this.props.history.push('/bookabook/');
+            this.props.history.push('/');
         }
         // authentication
         /*const promise = auth.signInWithEmailAndPassword(this.state.email, this.state.password);
